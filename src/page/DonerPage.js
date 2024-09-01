@@ -1,31 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import CardsComp from '../component/CardsComp'
 import axios from 'axios';
+import {useAuth} from '../page/AuthProvider'
 
 function DonerPage() {
     const [data,setData] = useState([])
+    const {isLogin} = useAuth();
 
-    // useEffect(()=>{
-    //     axios.get('https://api.coincap.io/v2/assets')
-    //     .then(function (response) {
-    //       setData(response.data.data)
-    //     })
-    //     .catch(function (error) {
-    //         console.log(error);
-    //     })
-    // })
+    useEffect(()=>{
+        //if login 
+        if(isLogin){
+            axios.get('https://jsonplaceholder.typicode.com/posts')
+            .then(function (response) {
+                //console.log(response.data);
+                setData(response.data)
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+        }
+        
+    })
 
     return (
         <>
             {
-                Array.isArray(data) && data.length > 0 ? 
+                //Array.isArray(data) && data.length > 0 ? 
+                isLogin ? 
                     data.map((val,index)=>{
                         return(
                             <CardsComp key={val.id} 
-                                name={val.name}
+                                name={val.title}
                                 bloodgroup='O+'
                                 mob='9929947074'
-                                donatedNoOfTime={val.rank}
+                                donatedNoOfTime={val.userId}
                                 lastDonatedDate='27-08-2024'
                             />
                         )

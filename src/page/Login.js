@@ -1,19 +1,32 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-
 import {ButtonComp,InputFieldComp} from '../component/FromFiledComp';
+import {useAuth} from '../page/AuthProvider'
+
+
 
 function Login() {
   const [validated, setValidated] = useState(false);
+  const { setIsLogin } = useAuth();
+  const navigate = useNavigate()
 
   const handleSubmit = (event) => {
+    event.preventDefault();
+
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
       event.stopPropagation();
+    }else{
+        //login funnction
+        setIsLogin(true);
+        navigate('/');
     }
 
+    
+
+    //validation agian true
     setValidated(true);
   };
 
