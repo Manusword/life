@@ -16,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //routes
 const UserRoute = require("./routes/user.route")
+const DonerRoute = require("./routes/doner.route")
 
 //db
 const connectDB = require("./db/db")
@@ -24,6 +25,7 @@ connectDB()
     app.listen(PORT,()=>{
         console.log('Server running on port '+ PORT)
         app.use("/user", UserRoute)
+        app.use("/doner", DonerRoute)
     })
 })
 .catch((err)=>{

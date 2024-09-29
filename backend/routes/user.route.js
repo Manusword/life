@@ -5,7 +5,7 @@ const upload = require("../middlewares/multer.middleware")
 
 
 // Routes
-route.get('/all', (req, res) => {
+route.get('/list', (req, res) => {
     res.status(200).json({ message: "hello user" });
 });
 
