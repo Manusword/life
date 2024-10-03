@@ -2,39 +2,39 @@ import React, { useEffect, useState } from 'react'
 import CardsComp from '../component/CardsComp'
 import axios from 'axios';
 import {useAuth} from '../page/AuthProvider'
+const URl = "http://localhost:8081/doner/list";
 
 function DonerPage() {
     const [data,setData] = useState([])
     const {isLogin} = useAuth();
 
-    useEffect(()=>{
-        //if login 
-        if(isLogin){
-            axios.get('https://jsonplaceholder.typicode.com/posts')
-            .then(function (response) {
-                //console.log(response.data);
-                setData(response.data)
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+    useEffect(() => {
+        if (isLogin) {
+            console.log(isLogin);
+            axios.get(URL)
+                .then(function (response) {
+                    console.log(response.data);
+                    setData(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
-        
-    })
+    }, [isLogin]); 
 
     return (
         <>
             {
-                //Array.isArray(data) && data.length > 0 ? 
-                isLogin ? 
+                Array.isArray(data) && data.length > 0 ? 
+                //isLogin ? 
                     data.map((val,index)=>{
                         return(
                             <CardsComp key={val.id} 
-                                name={val.title}
-                                bloodgroup='O+'
-                                mob='9929947074'
+                                name={val.fullname}
+                                bloodgroup={val.blood}
+                                mob={val.mobile}
                                 donatedNoOfTime={val.userId}
-                                lastDonatedDate='27-08-2024'
+                                lastDonatedDate={val.blood}
                             />
                         )
                     })
@@ -46,22 +46,6 @@ function DonerPage() {
                                 bloodgroup='O+'
                                 mob='99*******'
                                 donatedNoOfTime='3'
-                                lastDonatedDate='**-**-****'
-                            />
-
-                            <CardsComp key={2} 
-                                name='Av**** S*****' 
-                                bloodgroup='A+'
-                                mob='86*******'
-                                donatedNoOfTime='2'
-                                lastDonatedDate='**-**-****'
-                            />
-
-                            <CardsComp key={3} 
-                                name='Ni**** J*****' 
-                                bloodgroup='B-'
-                                mob='96*******'
-                                donatedNoOfTime='1'
                                 lastDonatedDate='**-**-****'
                             />
                         </>

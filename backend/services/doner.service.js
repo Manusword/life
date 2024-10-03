@@ -19,7 +19,6 @@ class DonerService {
             }
             return res.status(500).json({ message: "Doner not created", error: err.message });
         }
-            
     }
 
     //all doner list

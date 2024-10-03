@@ -11,7 +11,7 @@ function ButtonComp({type,name,onClickHandle}) {
   )
 }
 
-function InputFieldComp({labelName,type,placeholderName,defaultValue,requiredValue,controlId}) {
+function InputFieldComp({labelName,type,placeholderName,defaultValue,requiredValue,controlId,name,value,onChange}) {
   return (
     <>
         <Form.Group as={Col} md="4" controlId={controlId}>
@@ -21,6 +21,9 @@ function InputFieldComp({labelName,type,placeholderName,defaultValue,requiredVal
             type={type}
             placeholder={placeholderName}
             defaultValue={defaultValue}
+            name={name}
+            value={value}
+            onChange={onChange}
           />
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>

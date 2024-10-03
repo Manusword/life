@@ -3,8 +3,16 @@ const express = require("express");
 const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT
+const cors = require('cors');
 const app = express();
 
+// Use the cors middleware and specify the allowed origins
+app.use(cors({
+    origin: 'http://localhost:3000',  // Allow your React app
+    credentials: true,  // If you're using cookies, set credentials to true
+  }));
+// Alternatively, allow requests from any origin (less secure, but useful for development)
+app.use(cors());
 
 // Parse application/json (for JSON data)
 app.use(express.json());

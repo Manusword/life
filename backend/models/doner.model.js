@@ -27,6 +27,14 @@ const donerSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
+    last_donation_date: {
+        type: Date,
+        default: '',
+    },
+    status:{
+        type:String,
+        default:"Active"
+    },
     no_of_time: {
         type: Number,
         trim: true,
