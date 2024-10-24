@@ -37,12 +37,12 @@ function CardButton({id,name,fieldName,funAdd,funSub,defaultpost}) {
   return (
    <>
      <Container>
-        <Row>
-            <Col md={5}>{name}</Col>
-            <Col md={7}>
-                <Button variant="danger" style={{margin:'5px'}} onClick={AddFunction} >+</Button>
-                    {totalpost}
-                <Button variant="success" style={{margin:'5px'}} onClick={SubFunction}>-</Button>
+        <Row >
+            <Col>{name}</Col>
+            <Col>
+                <Button variant="danger"  onClick={AddFunction} >+</Button>
+                    <span style={{padding:'3px'}}>{totalpost}</span>
+                <Button variant="success"  onClick={SubFunction}>-</Button>
             </Col>
         </Row>
     </Container>
