@@ -2,9 +2,11 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import backendURL from "../page/backendUrl";
+//const URl = backendURL + "keepcoding/clients/update";
 
-function CardButton({id,name,funAdd,funSub,defaultpost}) {
+function CardButton({id,name,fieldName,funAdd,funSub,defaultpost}) {
 
     const [totalpost,setTotalpost] = useState(defaultpost)
     
@@ -15,6 +17,10 @@ function CardButton({id,name,funAdd,funSub,defaultpost}) {
     const SubFunction=()=>{
         setTotalpost(totalpost-1)
     }
+
+    useEffect(()=>{
+        console.log(backendURL + `keepcoding/clients/update?id=${id}&name=${fieldName}&value=${totalpost}`);
+    },[totalpost])
 
 
   return (
