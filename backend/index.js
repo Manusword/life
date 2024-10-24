@@ -8,7 +8,8 @@ const app = express();
 
 // Use the cors middleware and specify the allowed origins
 app.use(cors({
-    origin: 'http://localhost:3000',  // Allow your React app
+    //origin: 'http://localhost:3000',  // Allow your React app
+    origin: ['http://localhost:3000', 'https://life-mu-nine.vercel.app'],
     credentials: true,  // If you're using cookies, set credentials to true
   }));
 // Alternatively, allow requests from any origin (less secure, but useful for development)
