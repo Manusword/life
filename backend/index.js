@@ -25,6 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //routes
 const UserRoute = require("./routes/user.route")
 const DonerRoute = require("./routes/doner.route")
+const keepcodingRoute = require("./routes/keepcodingClient.route")
 
 //db
 const connectDB = require("./db/db")
@@ -34,6 +35,7 @@ connectDB()
         console.log('Server running on port '+ PORT)
         app.use("/user", UserRoute)
         app.use("/doner", DonerRoute)
+        app.use("/keepcoding/clients", keepcodingRoute)
     })
 })
 .catch((err)=>{
