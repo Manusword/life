@@ -4,6 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route,useNavigate } from 'react-router-dom';
 import Header from './page/Header';
 import DonerPage from './page/DonerPage';
+import ClientPage from './page/ClientPage';
 import Login from './page/Login';
 import Logout from './page/Logout';
 import Register from './page/Register';
@@ -38,7 +39,8 @@ function App() {
 function Home() {
   return (
     <>
-      <DonerPage />
+      {/* <DonerPage /> */}
+      <ClientPage/>
     </>
   )
 }
