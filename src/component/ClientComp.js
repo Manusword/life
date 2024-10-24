@@ -4,8 +4,6 @@ import CardButton from './CardButton';
 
 
 function ClientComp({id,clientName,youtube,facebook,reels,graphics}) {
-
-
   return (
     <Card style={{ width: '18rem', marginTop:'20px' }}>
       <Card.Body>

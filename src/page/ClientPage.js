@@ -10,46 +10,39 @@ const URl = backendURL + "keepcoding/clients/list";
 function ClientPage() {
  const [clients,setClient] = useState([])
  
-
   useEffect(() => {
     axios.get(URl)
-            .then(function (response) {
-                setClient(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+      .then(function (response) {
+          setClient(response.data);
+      })
+      .catch(function (error) {
+          console.log(error);
+      });
   }, []); 
 
   return (
     <>
-     <Container>
-      <Row>
-       {
-        clients.map((client,index)=>{
-          return(
-              <Col key={index}> 
-                  <ClientComp 
-                    key={client['_id']}
-                    id={client['_id']}
-                    clientName={client.name}
-                    youtube={client.youtube}
-                    facebook={client.facebook}
-                    reels={client.reels}
-                    graphics={client.graphics}
-                  />
-              </Col>
-          )
-        })
-       }
-       
-       
-
-        
-      </Row>
-    </Container>
-     
-     
+      <Container>
+        <Row>
+        {
+          clients.map((client,index)=>{
+            return(
+                <Col key={index}> 
+                    <ClientComp 
+                      key={client['_id']}
+                      id={client['_id']}
+                      clientName={client.name}
+                      youtube={client.youtube}
+                      facebook={client.facebook}
+                      reels={client.reels}
+                      graphics={client.graphics}
+                    />
+                </Col>
+            )
+          })
+        }
+        </Row>
+      </Container>
     </>
   )
 }

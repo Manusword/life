@@ -4,14 +4,15 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useEffect, useState } from 'react';
 import backendURL from "../page/backendUrl";
+import axios from 'axios';
 //const URl = backendURL + "keepcoding/clients/update";
 
 function CardButton({id,name,fieldName,funAdd,funSub,defaultpost}) {
 
-    const [totalpost,setTotalpost] = useState(defaultpost)
+    const [totalpost,setTotalpost] = useState(defaultpost);
     
     const AddFunction=()=>{
-        setTotalpost(totalpost+1)
+        setTotalpost(totalpost+1);
     }
 
     const SubFunction=()=>{
@@ -19,8 +20,18 @@ function CardButton({id,name,fieldName,funAdd,funSub,defaultpost}) {
     }
 
     useEffect(()=>{
-        console.log(backendURL + `keepcoding/clients/update?id=${id}&name=${fieldName}&value=${totalpost}`);
+       
+        const newurl = backendURL + `keepcoding/clients/update?id=${id}&fieldname=${fieldName}&value=${totalpost}`;
+
+        axios.patch(newurl)
+        .then(function (response) {
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
     },[totalpost])
+
 
 
   return (

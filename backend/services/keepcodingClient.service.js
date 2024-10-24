@@ -37,7 +37,30 @@ class keepcodingClientService {
             }
             return res.status(500).json({ message: "Client not created", error: err.message });
         }
-    }
+    }//function close
+
+
+    // Insert update client
+    async updateClient(req, res) {
+        try {
+            const {id,fieldname,value} = req.query;
+            const filter = { _id: id };
+            const update = { [fieldname]: value };
+            const client = await Client.findOneAndUpdate(filter, update, {
+                new: true
+            }); 
+            return res.status(201).json(client);  
+        } 
+        catch(err){
+            return res.status(400).json({
+                message: "Update Fail",
+                errors: Object.keys(err.errors).map(field => ({
+                    field,
+                    message: err.errors[field].message
+                }))
+            });
+        }
+   }//function close
 
 }
 
