@@ -13,7 +13,7 @@ app.use(cors({
     credentials: true,  // If you're using cookies, set credentials to true
   }));
 // Alternatively, allow requests from any origin (less secure, but useful for development)
-app.use(cors());
+//app.use(cors());
 
 // Parse application/json (for JSON data)
 app.use(express.json());
