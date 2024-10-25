@@ -10,26 +10,28 @@ import axios from 'axios';
 function CardButton({id,name,fieldName,funAdd,funSub,defaultpost}) {
 
     const [totalpost,setTotalpost] = useState(defaultpost);
+    const [flag,setflag] = useState(false);
     
     const AddFunction=()=>{
         setTotalpost(totalpost+1);
+        setflag(true);
     }
 
     const SubFunction=()=>{
         setTotalpost(totalpost-1)
+        setflag(true);
     }
 
     useEffect(()=>{
-       
-        const newurl = backendURL + `keepcoding/clients/update?id=${id}&fieldname=${fieldName}&value=${totalpost}`;
-
-        axios.patch(newurl)
-        .then(function (response) {
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-
+       if(flag){
+            const newurl = backendURL + `keepcoding/clients/update?id=${id}&fieldname=${fieldName}&value=${totalpost}`;
+            axios.patch(newurl)
+            .then(function (response) {
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
     },[totalpost])
 
 
