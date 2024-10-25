@@ -81,7 +81,7 @@ function NewClient() {
         .catch(function (error) {
             console.log(error);
         });
-    }, [editid]); 
+    }, [editid,clients]); 
     
     const onClickEdit =(id)=>{
         const editData = clients.find(val=>val._id === id)
