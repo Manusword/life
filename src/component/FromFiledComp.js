@@ -14,7 +14,7 @@ function ButtonComp({type,name,onClickHandle}) {
 function InputFieldComp({labelName,type,placeholderName,defaultValue,requiredValue,controlId,name,value,onChange}) {
   return (
     <>
-        <Form.Group as={Col} md="4" controlId={controlId}>
+        <Form.Group as={Col} md="3" controlId={controlId}>
           <Form.Label>{labelName}</Form.Label>
           <Form.Control
             required={requiredValue}
