@@ -40,4 +40,14 @@ const clientEdit = async (req, res) => {
 }
 
 
-module.exports = { listClient,newClient,updateClient,clientEdit};
+
+const clientDelete = async (req, res) => {
+    try {
+            await clientDb.deleteClient(req, res);
+    } catch (err) {
+        return res.status(500).json({ message: "Doner not found. Something went wrong", error: err.message });
+    }
+}
+
+
+module.exports = { listClient,newClient,updateClient,clientEdit,clientDelete};

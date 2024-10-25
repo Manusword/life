@@ -72,7 +72,7 @@ function NewClient() {
 
 
 
-    //edit
+    //client list page 
     useEffect(() => {
         axios.get(clientlistURl)
         .then(function (response) {
@@ -88,6 +88,28 @@ function NewClient() {
         setEditid(id)
         setData({...editData})
     }
+
+    const onClickdelete =(id)=>{
+        let result = window.confirm("Do you want to Delete?");
+        if (result) {
+            //delete
+            let newurl = backendURL + `keepcoding/clients/${id}`;
+            let newmessage="client deleted successful";
+            axios.delete(newurl,{
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            })
+            .then(function (response) {
+                setMessage(newmessage);
+                setClient(oldData => oldData.filter(val => val._id !== id))
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        } //if (result) {
+    }
+    //client list page 
 
   return (
     <>
@@ -160,7 +182,7 @@ function NewClient() {
       <h2 style={{color:"green"}}>{message}</h2>
     </Form>
     <hr/>
-    <ClientList clients={clients} onClickEditFun={onClickEdit}/>
+    <ClientList clients={clients} onClickEditFun={onClickEdit} onClickdeleteFun={onClickdelete}/>
     </>
   );
 }

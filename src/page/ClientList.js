@@ -6,7 +6,7 @@ import Table from 'react-bootstrap/Table';
 import {ButtonComp} from '../component/FromFiledComp';
 
 
-function ClientList({clients,onClickEditFun}) {
+function ClientList({clients,onClickEditFun,onClickdeleteFun}) {
     
     return (
         <Container style={{marginTop:"30px"}}>
@@ -43,7 +43,7 @@ function ClientList({clients,onClickEditFun}) {
                                             <ButtonComp type="warning" name='Edit' onClickHandle={()=>onClickEditFun(client._id)} />
                                         </td>
                                         <td>
-                                            
+                                            <ButtonComp type="danger" name='Edit' onClickHandle={()=>onClickdeleteFun(client._id)} />
                                         </td>
                                     </tr>
                                 )
