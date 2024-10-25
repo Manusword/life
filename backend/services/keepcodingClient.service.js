@@ -40,7 +40,7 @@ class keepcodingClientService {
     }//function close
 
 
-    // Insert update client
+    // update no of views update client
     async updateClient(req, res) {
         try {
             const {id,fieldname,value} = req.query;
@@ -61,6 +61,29 @@ class keepcodingClientService {
             });
         }
    }//function close
+
+   // update no of views update client
+   async editClientInfo(req, res) {
+    try {
+        const id = req.params.id;
+        const filter = { _id: id };
+        const update = { ...req.body };
+        const client = await Client.findOneAndUpdate(filter, update, {
+            new: true
+        }); 
+        console.log(client)
+        return res.status(201).json(client);  
+    } 
+    catch(err){
+        return res.status(400).json({
+            message: "Update Fail",
+            errors: Object.keys(err.errors).map(field => ({
+                field,
+                message: err.errors[field].message
+            }))
+        });
+    }
+}//function close
 
 }
 
