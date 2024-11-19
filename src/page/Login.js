@@ -4,13 +4,22 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import {ButtonComp,InputFieldComp} from '../component/FromFiledComp';
 import {useAuth} from '../page/AuthProvider'
+import axios from 'axios';
 
 
 
 function Login() {
   const [validated, setValidated] = useState(false);
   const { setIsLogin } = useAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [data, setData] = useState({
+    mobile: '',
+    password: '',
+  });
+  
+  const onChangeHandel = (e)=>{
+    setData(pre=>({...pre,[e.target.name]:e.target.value}))
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,8 +29,31 @@ function Login() {
       event.stopPropagation();
     }else{
         //login funnction
-        setIsLogin(true);
-        navigate('/');
+        axios.post("http://localhost:8081/user/login",
+          data,
+          {
+            withCredentials: true,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            }
+          
+        })
+          .then(function (response) {
+            console.log("Login successful", response.data);
+            //reset
+              setData({
+                mobile: '',
+                password: '',
+              })
+            navigate("/login");
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+
+        
+        //setIsLogin(true);
+        //navigate('/');
     }
 
     
@@ -30,14 +62,38 @@ function Login() {
     setValidated(true);
   };
 
+
+ 
+
   return (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
       <Row className="mb-3">
         <h3>Login</h3>
-        <InputFieldComp labelName='' type='text' placeholderName='Mobile' defaultValue='' requiredValue={true}
-        controlId='loginField1' />
+      
+        <InputFieldComp 
+          labelName='' 
+          type='text' 
+          placeholderName='Mobile' 
+          equiredValue={true}
+          controlId='registerField2' 
+          name="mobile"
+          value={data.mobile}
+          onChange={onChangeHandel}
+        />
 
-        <InputFieldComp labelName='' type='password' placeholderName='Password' defaultValue='' requiredValue={true} controlId='loginField2' />
+
+        <InputFieldComp 
+          labelName='' 
+          type='password' 
+          placeholderName='Password' 
+          requiredValue={true} 
+          controlId='registerField5' 
+          name="password"
+          value={data.password}
+          onChange={onChangeHandel}
+         />
+
+       
       
       </Row>
       

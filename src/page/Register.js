@@ -5,8 +5,10 @@ import axios from 'axios';
 
 
 import {ButtonComp,InputFieldComp} from '../component/FromFiledComp';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
+  const  navigate = useNavigate();
   const [validated, setValidated] = useState(false);
   const [data, setData] = useState({
     fullname: '',
@@ -23,7 +25,7 @@ function Register() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
@@ -36,14 +38,15 @@ function Register() {
           axios.post("http://localhost:8081/user/register",
             data,
             {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            }
+              withCredentials: true,
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+              }
             
           })
             .then(function (response) {
-              console.log("Registration successful", response.data);
-                //reset
+              //console.log("Registration successful", response.data);
+              //reset
                 setData({
                   fullname: '',
                   mobile: '',
@@ -52,6 +55,7 @@ function Register() {
                   blood: '',
                   address: '',
                 })
+              navigate("/login");
             })
             .catch(function (error) {
                 console.log(error);

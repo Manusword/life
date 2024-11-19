@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require("express");
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser')
 
 const PORT = process.env.PORT
 const cors = require('cors');
@@ -17,6 +18,7 @@ app.use(cors({
 
 // Parse application/json (for JSON data)
 app.use(express.json());
+app.use(cookieParser());
 
 
 // For form-urlencoded data parsing (for form submissions)

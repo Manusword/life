@@ -15,5 +15,9 @@ route.post('/register', upload.fields([
     { name: 'banner', maxCount: 1 }
 ]), inputValidation, registerUser);
 
+route.post('/login',async(req,res)=>{
+    res.status(201).json({'message': "login successful"})
+})
+
 
 module.exports = route
