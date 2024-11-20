@@ -1,14 +1,23 @@
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
 
 
 const hashPassword = async(text)=>{
-    return await bcrypt.hash(text, saltRounds)
+   try{
+        return await bcrypt.hash(text, 10)
+    }
+    catch(err){
+        console.log(err)
+    }
 }
 
+const verifyPassword = async(loginPass, dbPass)=>{
+    try{
+        return await bcrypt.compare(loginPass, dbPass);
+    }
+    catch(err){
+        console.log(err)
+    }
+    
+}
 
-module.exports = {hashPassword}
-
-// bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
-//     // Store hash in your password DB.
-// });
+module.exports = {hashPassword,verifyPassword}

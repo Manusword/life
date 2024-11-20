@@ -6,7 +6,8 @@ class userService {
     async newUser(data){
         try{
             const newuser = await User.create(data);
-            return await User.findOne({_id:newuser._id}).select("-password -refreshToken")
+            return await User.findOne({_id:newuser._id})
+            //return await User.findOne({_id:newuser._id}).select("-password -refreshToken")
         }
         catch(err){
             throw err;
@@ -14,18 +15,16 @@ class userService {
     }
 
 
-    //find mobile no
+    //find with mobile no 
     async mobileFind(mobile){
         try{
-            const newuser = await User.find({'mobile':mobile})
-            return newuser; 
+            const foundUser = await User.findOne({'mobile':mobile})
+            return foundUser; 
         }
         catch(err){
             throw err;
         }
     }
-
-  
 
 
 }

@@ -3,10 +3,6 @@
 
 
 const inputValidation = (req, res, next) => {
-    console.log(req.body);
-    console.log(req.headers['content-type']);
-   
-
     const { fullname, address, blood, mobile, password } = req.body;
 
     if (!fullname || !address || !blood || !mobile || !password) {
