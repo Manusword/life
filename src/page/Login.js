@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import {ButtonComp,InputFieldComp} from '../component/FromFiledComp';
 import {useAuth} from '../page/AuthProvider'
 import axios from 'axios';
-
+import backendURL from "./backendUrl";
+const URL = backendURL + "user/login";//"http://localhost:8081/user/login"
 
 
 function Login() {
@@ -29,7 +30,7 @@ function Login() {
       event.stopPropagation();
     }else{
         //login funnction
-        axios.post("http://localhost:8081/user/login",
+        axios.post(URL,
           data,
           {
             withCredentials: true,
@@ -39,28 +40,49 @@ function Login() {
           
         })
           .then(function (response) {
-            console.log("Login successful", response.data);
+            //console.log("Login successful", response.data.status);
+            if(response.data.status){
+              setIsLogin(true);
+              navigate("/");
+            }
             //reset
               setData({
                 mobile: '',
                 password: '',
               })
-            navigate("/login");
+             
           })
           .catch(function (error) {
               console.log(error);
           });
 
-        
-        //setIsLogin(true);
-        //navigate('/');
     }
-
-    
-
     //validation agian true
     setValidated(true);
   };
+
+
+
+  useEffect(() => {
+      axios.post(URL,{},
+              {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+              })
+            .then(function (response) {
+                //console.log(response.data);
+                if(response.data.status){
+                  setIsLogin(true);
+                  navigate("/");
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+      
+  }, []); 
 
 
  

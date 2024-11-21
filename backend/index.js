@@ -7,6 +7,7 @@ const PORT = process.env.PORT
 const cors = require('cors');
 const app = express();
 
+
 // Use the cors middleware and specify the allowed origins
 app.use(cors({
     //origin: 'http://localhost:3000',  // Allow your React app

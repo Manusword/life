@@ -2,6 +2,7 @@ const userService = require('../services/user.service')
 const {hashPassword,verifyPassword} = require("../middlewares/bcrypt")
 const {jwtCreateToken} = require("../middlewares/jwt")
 const userDb = new userService();
+const cookieParser = require('cookie-parser')
 
 const registerUser = async (req,res)=>{
     try{
@@ -45,8 +46,11 @@ const registerUser = async (req,res)=>{
 
 
 const loginUser = async (req,res)=>{
-   try{
-       
+    try{
+        if(req.cookies.token){
+            return res.status(200).json({status: true })
+        }
+    
         const {mobile,password} = req.body;
         if(!mobile || !password){
             return res.status(400).json({ message: "Mobile and password are required." });
@@ -83,9 +87,6 @@ const loginUser = async (req,res)=>{
         res.status(500).json({ message: "An internal server error occurred.", error: err.message });
    }
 }
-
-
-
 
 
 module.exports = {registerUser,loginUser}

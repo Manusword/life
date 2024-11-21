@@ -40,8 +40,8 @@ function App() {
 function Home() {
   return (
     <>
-      {/* <DonerPage /> */}
-      <ClientPage/>
+      <DonerPage />
+      {/* <ClientPage/> */}
     </>
   )
 }

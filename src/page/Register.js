@@ -2,10 +2,10 @@ import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import axios from 'axios';
-
-
 import {ButtonComp,InputFieldComp} from '../component/FromFiledComp';
 import { useNavigate } from 'react-router-dom';
+import backendURL from "./backendUrl";
+const URL = backendURL + "user/register";//"http://localhost:8081/user/register"
 
 function Register() {
   const  navigate = useNavigate();
@@ -35,7 +35,7 @@ function Register() {
         event.stopPropagation();
       }else{
         //register api
-          axios.post("http://localhost:8081/user/register",
+          axios.post(URL,
             data,
             {
               withCredentials: true,

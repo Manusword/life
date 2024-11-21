@@ -5,7 +5,7 @@ import axios from 'axios';
 import backendURL from "./backendUrl";
 import ClientList from './ClientList';
 import {ButtonComp,InputFieldComp} from '../component/FromFiledComp';
-const clientlistURl = backendURL + "keepcoding/clients/list";
+const URL = backendURL + "keepcoding/clients/list";
 
 function NewClient() {
     const [clients,setClient] = useState([])
@@ -74,14 +74,14 @@ function NewClient() {
 
     //client list page 
     useEffect(() => {
-        axios.get(clientlistURl)
+        axios.get(URL)
         .then(function (response) {
             setClient(response.data);
         })
         .catch(function (error) {
             console.log(error);
         });
-    }, [editid,clients]); 
+    }, [editid]); //loading multiple time
     
     const onClickEdit =(id)=>{
         const editData = clients.find(val=>val._id === id)

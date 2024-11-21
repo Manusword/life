@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import CardsComp from '../component/CardsComp'
 import axios from 'axios';
 import {useAuth} from '../page/AuthProvider'
-const URl = "http://localhost:8081/doner/list";
+import backendURL from "../page/backendUrl";
+const URl = backendURL + "doner/list";
 
 function DonerPage() {
     const [data,setData] = useState([])
@@ -10,14 +11,13 @@ function DonerPage() {
 
     useEffect(() => {
         if (isLogin) {
-            console.log(isLogin);
-            axios.get(URL)
+            axios.get(URl)
                 .then(function (response) {
-                    console.log(response.data);
+                    console.log('donel list');
                     setData(response.data);
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    //console.log(error);
                 });
         }
     }, [isLogin]); 
@@ -41,13 +41,7 @@ function DonerPage() {
                 :
                     (
                         <>
-                            <CardsComp key={1} 
-                                name='Ma**** S*****' 
-                                bloodgroup='O+'
-                                mob='99*******'
-                                donatedNoOfTime='3'
-                                lastDonatedDate='**-**-****'
-                            />
+                           <h2>Doner List</h2>
                         </>
                     )
             }

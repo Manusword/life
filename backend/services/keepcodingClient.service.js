@@ -6,7 +6,7 @@ class keepcodingClientService {
     async clientList (req, res){
         try{
             const clients = await Client.find();  
-            console.log(clients)
+            //console.log(clients)
             return res.status(201).json(clients);  
         }
         catch(err){
