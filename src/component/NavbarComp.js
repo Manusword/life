@@ -13,15 +13,19 @@ function NavbarComp() {
       <Container>
         <Navbar.Brand as={Link} to="/">Life</Navbar.Brand>
         <Nav className="ml-auto">
-          <Nav.Link as={Link} to="/newclient">New Client</Nav.Link>
-          <Nav.Link as={Link} to="/">Client List</Nav.Link>
+         
          {!isLogin ?(
             <>
               <Nav.Link as={Link} to="/login">Login</Nav.Link>
               <Nav.Link as={Link} to="/register">Register</Nav.Link>
             </>
           ):(
-            <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
+            <>
+             <Nav.Link as={Link} to="/newclient">New Client</Nav.Link>
+              <Nav.Link as={Link} to="/clientlist">Client List</Nav.Link>
+              <Nav.Link as={Link} to="/donerlist">Doner List</Nav.Link>
+              <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
+            </>
           )}
           
           

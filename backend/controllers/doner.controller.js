@@ -20,5 +20,14 @@ const newDoner = async (req, res) => {
 }
 
 
+const newDonerViaUserRegister = async (data) => {
+    try {
+        const saveDoner = await donerDb.insertNewDoner(data);
+    } catch (err) {
+        return err;
+    }
+}
 
-module.exports = { newDoner,listDoner };
+
+
+module.exports = { newDoner,listDoner,newDonerViaUserRegister};

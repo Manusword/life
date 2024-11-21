@@ -25,6 +25,8 @@ function App() {
           <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/newclient" element={<NewClient />} />
+              <Route path="/clientlist" element={<KeepCodingClient />} />
+              <Route path="/donerlist" element={<DonerList />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/logout" element={<Logout />} />
@@ -40,7 +42,7 @@ function App() {
 function Home() {
   return (
     <>
-      <DonerPage />
+      {/* <DonerPage /> */}
       {/* <ClientPage/> */}
     </>
   )
@@ -49,6 +51,14 @@ function Home() {
 
 function Contact() {
   return <h2>Contact Page</h2>;
+}
+
+function DonerList() {
+  return  <DonerPage />;
+}
+
+function KeepCodingClient() {
+  return  <ClientPage />;
 }
 
 export default App;

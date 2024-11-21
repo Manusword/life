@@ -2,7 +2,8 @@ const userService = require('../services/user.service')
 const {hashPassword,verifyPassword} = require("../middlewares/bcrypt")
 const {jwtCreateToken} = require("../middlewares/jwt")
 const userDb = new userService();
-const cookieParser = require('cookie-parser')
+const {newDonerViaUserRegister} = require("../controllers/doner.controller")
+
 
 const registerUser = async (req,res)=>{
     try{
@@ -22,8 +23,17 @@ const registerUser = async (req,res)=>{
             //adding new password into req.body
             const reqData = {...req.body, password: hashpass}
            
-            //save into DB
+            //save into DB User
             const createdData = await  userDb.newUser(reqData);
+            
+            
+            //save into Doner
+            try{
+                await newDonerViaUserRegister({...reqData,UserId:createdData._id});
+            }
+            catch(err){
+                throw err;
+            }
             
             const token = await jwtCreateToken(createdData._id, createdData.fullname)
             

@@ -3,6 +3,16 @@ const Doner = require('../models/doner.model');
 class DonerService {
 
     // Insert new doner
+    async insertNewDoner(data) {
+        try {
+            const doner = await Doner.create(data); 
+            return await Doner.findOne({_id:doner._id})
+        } catch (err) {
+            throw err;
+        }
+    }
+    
+    // Insert new doner
     async newDoner(req, res) {
         try {
             const doner = await Doner.create(req.body); 
@@ -37,6 +47,8 @@ class DonerService {
             });
         }
     }
+
+
 
 }
 
